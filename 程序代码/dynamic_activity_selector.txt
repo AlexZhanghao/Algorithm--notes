@@ -1,0 +1,14 @@
+DYNAMIC-ACTIVITY-SELECTOR(s,f)
+let c[1...n,1...n] and break_point[1...n,1...n] be new tables
+for i=1 to n
+    c[i,i]=1
+    break_point[i,i]=i
+for l=2 to n
+    j=i+l-1
+    c[i,j]=∞
+    for k=i to j
+        if s[k]≥f[k-1]
+           q=c[i,k]+c[k,j]
+           if q>c[i,j]
+              c[i,j]=q
+              break_point[i,j]=k
