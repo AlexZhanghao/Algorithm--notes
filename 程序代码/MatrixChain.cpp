@@ -10,7 +10,7 @@ using namespace std;
 void MatrixChainOrder(int *p,int **bestprice,int **breakpoint){
     int n=foo(p);
 
-    //创建多维动态数组
+    //// Create a multidimensional dynamic array 9
     int** m=new int*[n];
     int** s=new int*[n];
     for(int i=0;i<n;++i){
