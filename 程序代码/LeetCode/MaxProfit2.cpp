@@ -50,15 +50,18 @@ int maxProfit(vector<int>& prices) {
 
     int i=0;
     while(i<n-1){
-        while(i<n-1&&(prices[i]>prices[i+1]||prices[i]==prices[i+1])){
+        while(i<n-1&&(prices[i]>=prices[i+1])){
             ++i;
         }
+
         valley=prices[i];
-        while(i<n-1&&(prices[i]<prices[i+1]||prices[i]==prices[i+1])){
+        while(i<n-1&&(prices[i]<=prices[i+1])){
             ++i;
         }
         peak=prices[i];
-        max_profit+=peak-valley;
+        if(peak-valley>max_profit){
+            max_profit+=peak-valley;
+        }
     }
 
     return max_profit;        
