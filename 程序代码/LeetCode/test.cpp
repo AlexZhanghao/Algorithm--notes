@@ -1,11 +1,13 @@
 #include<iostream>
+#include<vector>
 
 using namespace std;
 
 int main(){
-    if(2>=2){
-        cout<<1<<endl;
-    }else{
-        cout<<0<<endl;
-    }
+    int *a;
+    int *b=a;
+    a=new int;
+    int *c=a;
+    cout<<b<<"   "<<c<<endl;
+    
 }
