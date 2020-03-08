@@ -7,6 +7,15 @@
         "hash_map": "cpp",
         "iostream": "cpp",
         "queue": "cpp",
-        "stack": "cpp"
+        "stack": "cpp",
+        "ios": "cpp",
+        "deque": "cpp",
+        "xstring": "cpp",
+        "unordered_set": "cpp",
+        "limits": "cpp",
+        "xlocale": "cpp",
+        "xutility": "cpp",
+        "xhash": "cpp",
+        "unordered_map": "cpp"
     }
 }
