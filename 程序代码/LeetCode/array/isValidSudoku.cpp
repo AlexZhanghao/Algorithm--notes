@@ -13,6 +13,7 @@ public:
         for(int i=0;i<9;++i){
             for(int j=0;j<9;++j){
                 if(board[i][j]!='.'){
+                    //这里减49是为了把他从char转化成int
                     int k=board[i][j]-49;
                     int boxindex=(i/3)*3+j/3;
                     if(row[i][k]||cloumn[j][k]||box[boxindex][k]) return false;
