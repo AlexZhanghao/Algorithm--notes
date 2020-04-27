@@ -1,6 +1,7 @@
 #include<iostream>
 #include<vector>
 #include<queue>
+#include<stack>
 
 using namespace std;
 
@@ -12,33 +13,47 @@ struct TreeNode {
     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
+//这里在2的基础上运用栈做辅助即可
 class Solution {
 public:
     vector<vector<int>> levelOrder(TreeNode* root) {
-        if(root==NULL){
-            return {};
-        }
-
-        queue<TreeNode*> qnt;
-        vector<vector<int>> lorder;
-        int level_length=0;
-        qnt.push(root);
-        while(!qnt.empty()){
-            level_length=qnt.size();
+        if(root==NULL) return {};
+        queue<TreeNode*> q;
+        stack<TreeNode*> s;
+        q.push(root);
+        vector<vector<int>> out;
+        bool is_left=false;
+        while(!q.empty()){
+            TreeNode* cur;
             vector<int> a;
-            for(int i=0;i<level_length;++i){
-                TreeNode *node=qnt.front();
-                qnt.pop;
-                if(node->left!=NULL){
-                    qnt.push(node->left);
-                }
-                if(node->right!=NULL){
-                    qnt.push(node->right);
-                }
-                a.push_back(node->val);
+            int qsize=q.size();
+            for(int i=0;i<qsize;++i){
+                cur=q.front();
+                a.push_back(cur->val);
+                s.push(cur);
+                q.pop();
             }
-            lorder.push_back(a);
+
+            if(is_left){
+                for(int i=0;i<qsize;++i){
+                    cur=s.top();
+                    s.pop();
+                    if(cur->left!=NULL) q.push(cur->left);
+                    if(cur->right!=NULL) q.push(cur->right);                    
+                }
+                is_left=false;
+            }
+            else{
+                for(int i=0;i<qsize;++i){
+                    cur=s.top();
+                    s.pop();
+                    if(cur->right!=NULL) q.push(cur->right);
+                    if(cur->left!=NULL) q.push(cur->left);                                       
+                }
+                is_left=true;
+            }
+            out.push_back(a);
         }
-        return lorder;
+        return out;
     }
 };
