@@ -19,6 +19,8 @@
         "unordered_map": "cpp",
         "utility": "cpp",
         "string": "cpp",
-        "tuple": "cpp"
+        "tuple": "cpp",
+        "xiosbase": "cpp",
+        "cmath": "cpp"
     }
 }
