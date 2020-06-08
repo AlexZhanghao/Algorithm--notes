@@ -10,7 +10,7 @@ public:
     myString(const myString& str);
     ~myString();
 
-    //拷贝赋值操作符
+    //赋值操作符
     myString& operator=(const myString &str);
     bool operator==(const myString &str)const;
     myString operator+(const myString &str)const;

@@ -41,6 +41,9 @@ public:
 	//重载赋值运算符
 	SmartPtr& operator=(const SmartPtr& rhs)
 	{
+		//但事实上这里不做证同测试也可以，因为没有牵扯数组释放在里面
+		if(this==&rhs) return *this;
+		 
 		++rhs.rp->count;
 		if (rp != nullptr && --rp->count == 0)
 		{

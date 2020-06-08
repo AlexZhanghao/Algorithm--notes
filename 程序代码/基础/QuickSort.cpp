@@ -19,6 +19,10 @@ void QuickSort(int *arr, int l, int r) {
 	QuickSort(arr, i + 1, r);
 }
 
+//自我总结快排三要素如下：
+//1、假设标记位是最左边的结点 
+//2、要先从右边的开始比较 
+//3、左边的要从标记位开始，不要用标记位+1
 int Partition(int *arr, int l, int r) {
 	if (l >= r) return l;
 	int left = l, right = r;

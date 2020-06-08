@@ -14,46 +14,22 @@ struct TreeNode {
 class Solution {
 public:
     TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
-        if(preorder.size()==0) return NULL;
-        TreeNode* bintree=new TreeNode(preorder[0]);
-        TreeNode* cur=bintree;
-        int i=0;
-        while(inorder[i]!=preorder[0]) ++i;
-        vector<int> preleft;
-        vector<int> preright;
-        vector<int> inoleft;
-        vector<int> inoright;
-        for(int j=0;j<i;++j){
-            preleft.push_back(preorder[j+1]);
-            inoleft.push_back(inorder[j]);
-        }
-        for(int k=i+1;k<preorder.size();++k){
-            preright.push_back(preorder[k]);
-            inoright.push_back(inorder[k]);
-        }
-        bintree->left=buildTree(preleft,inoleft);
-        bintree->right=buildTree(preright,inoright);
-        return bintree;
-    }
-};
-
-//这兄弟把建vector分别装左右部分的步骤省了，所以无论时间还是空间上都要好很多
-class Solution2 {
-public:
-    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
-        int pos = 0;
-        return buildTree(preorder, pos, inorder, 0, inorder.size()-1);
+        if(preorder.size()==0) return nullptr;
+        int root=0;
+        return buildHelper(preorder,inorder,root,0,preorder.size()-1);
     }
 
-    TreeNode* buildTree(vector<int>& preorder, int& pos, vector<int>& inorder, int left, int right) {
-        if (pos >= preorder.size()) return 0;
-        int i = left;
-        for (i = left; i <= right; ++i) {
-            if (inorder[i] == preorder[pos]) break;
+    //pos指定preorder中根节点的位置，left和right指定inorder中的范围
+    //注意这里pos作为应用传参在a->left结束后，pos的位置就已经指向了右子树的起始位置
+    TreeNode* buildHelper(vector<int>& preorder, vector<int>& inorder,int &pos,int left,int right){
+        if(pos>=preorder.size()) return nullptr;
+        TreeNode* a=new TreeNode(preorder[pos]);
+        int iroot=left;
+        for(;iroot<=right;++iroot){
+            if(inorder[iroot]==preorder[pos]) break;
         }
-        TreeNode* node = new TreeNode(preorder[pos]);
-        if (left <= i-1) node->left = buildTree(preorder, ++pos, inorder, left, i-1);  // 左子树
-        if (i+1 <= right) node->right = buildTree(preorder, ++pos, inorder, i + 1, right);  // 右子树
-        return node;
+        if(left<=iroot-1)a->left=buildHelper(preorder,inorder,++pos,left,iroot-1);
+        if(iroot+1<=right)a->right=buildHelper(preorder,inorder,++pos,iroot+1,right);
+        return a;
     }
 };
