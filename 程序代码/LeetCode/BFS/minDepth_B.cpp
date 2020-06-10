@@ -21,26 +21,28 @@ public:
             return 0;
         }
 
-        queue<pair<TreeNode*,int>> qr;
+        queue<TreeNode*> qr;
         int mindep=1;
-        pair<TreeNode*,int> p1(root,mindep);
-        qr.push(p1);
+        qr.push(root);
         
 
         while(!qr.empty()){
-            pair<TreeNode*,int> node=qr.front();
-            //这里这一点才是画龙点睛的地方,因为break的时候，这里刚好就是break的那个元素对应的层数
-            mindep=node.second;
-            qr.pop();
-            if(node.first->left==NULL&&node.first->right==NULL){
-                break;
+            int qsize=qr.size();
+            for(int i=0;i<qsize;++i){
+                TreeNode* node=qr.front();
+                qr.pop();
+                if(node->left==NULL&&node->right==NULL){
+                    return mindep;
+                }
+                if(node->left!=NULL){
+                    qr.push(node->left);                
+                }
+                if(node->right!=NULL){
+                    qr.push(node->right);
+                }
             }
-            if(node.first->left!=NULL){
-                qr.push(pair<TreeNode*,int>(node.first->left,mindep+1));                
-            }
-            if(node.first->right!=NULL){
-                qr.push(pair<TreeNode*,int>(node.first->right,mindep+1));
-            }
+            
+            ++mindep;            
         }
 
         return mindep;

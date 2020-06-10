@@ -5,6 +5,7 @@
         "xlocale": "cpp",
         "xstring": "cpp",
         "utility": "cpp",
-        "stack": "cpp"
+        "stack": "cpp",
+        "unordered_set": "cpp"
     }
 }
