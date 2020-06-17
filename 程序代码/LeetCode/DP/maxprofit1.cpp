@@ -24,7 +24,7 @@ int maxProfit(vector<int>& prices) {
         }
     }
 
-    return max_profit;        
+    return max_profit;
 }
 
 //这里使用在评论区中白嫖到的所谓股票问题通杀解法来处理下这题

@@ -8,28 +8,21 @@ using namespace std;
 class Solution {
 public:
     int coinChange(vector<int>& coins, int amount) {
-        vector<int> step(amount+1,0);
-        for(int i=1;i<=amount;++i){
-            int minstep=INT_MAX;
-            for(int j=0;j<coins.size();++j){
-                if(i-coins[j]>=0&&step[i-coins[j]]!=-1){
-                    if(step[i-coins[j]]<minstep){
-                        minstep=step[i-coins[j]];
-                    }
-                }
+        int n=coins.size();
+        if(amount<0||n<=0) return -1;
+        if(amount==0) return 0;
+        vector<int> dp(amount+1,0);
+        for(int i=1;i<amount+1;++i){
+            int min_num=INT_MAX;
+            for(int &j:coins){
+                if(i>=j&&dp[i-j]!=-1) min_num=min(dp[i-j]+1,min_num);
             }
-            if(minstep!=INT_MAX){
-                step[i]=minstep+1;
-            }
-            else{
-                step[i]=-1;
-            }           
+            if(min_num!=INT_MAX) dp[i]=min_num;
+            else dp[i]=-1;
         }
-        return step[amount];
+        return dp[amount];
     }
 };
-
-
 
 //官方给的自顶向下版本
 class Solution {
@@ -57,8 +50,6 @@ private:
     }
 };
 
-
-
 //copy的答友的贪心算法，讲真，他写的有点东西（自己写的过于冗余且有弊端，未能通过...）
 class Solution3 {
 void coinChange(vector<int>& coins, int amount, int c_index, int count, int& ans)
@@ -84,4 +75,5 @@ int coinChange(vector<int>& coins, int amount)
     coinChange(coins, amount, 0, 0, ans);
     return ans == INT_MAX ? -1 : ans;
 }
-}；
+};
+

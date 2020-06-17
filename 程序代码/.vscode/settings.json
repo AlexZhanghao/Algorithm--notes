@@ -8,6 +8,7 @@
         "stack": "cpp",
         "unordered_set": "cpp",
         "xutility": "cpp",
-        "algorithm": "cpp"
+        "algorithm": "cpp",
+        "set": "cpp"
     }
 }

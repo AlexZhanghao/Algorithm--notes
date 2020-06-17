@@ -30,3 +30,23 @@ public:
         return (abs(left_dep-right_dep)<=1);        
     }
 };
+
+//另一种写法
+class Solution2 {
+public:
+    bool isBalanced(TreeNode* root) {
+        if(root==NULL) return true;
+        return (dfs(root)==-1)?false:true;
+    }
+
+    int dfs(TreeNode* root){
+        if(root) return 0;
+
+        int left_dep=dfs(root->left);
+        if(left_dep==-1) return -1;
+        int right_dep=dfs(root->right);
+        if(right_dep==-1) return -1;
+
+        return abs(left_dep-right_dep)<2?max(left_dep,right_dep)+1:-1;
+    }
+};
