@@ -10,33 +10,30 @@ public:
         int n=nums.size();
         if(n<3) return {};
         sort(nums.begin(),nums.end());
-        int start=0,left,right;
         vector<vector<int>> out;
-        vector<int> v;
-        while(start<n-2&&nums[start]<=0){
-            if(start>0&&nums[start]==nums[start-1]){
-                ++start;
-                continue;
-            }            
+        int start=0,left=0,right=0;
+        for(;start<n-2;++start){
             left=start+1;
             right=n-1;
             while(left<right){
+                //下面两个查重只需要留一个，这里好好品味下缘由
                 if(left>start+1&&nums[left]==nums[left-1]){
                     ++left;
                     continue;
                 }
-                if(nums[start]+nums[left]+nums[right]==0){
-                    v.push_back(nums[start]);
-                    v.push_back(nums[left]);
-                    v.push_back(nums[right]);
-                    out.push_back(v);
-                    v.clear();
-                    ++left;--right;
+                // if(right<n-1&&nums[right]==nums[right+1]){
+                //     --right;
+                //     continue;
+                // }
+
+                int sum=nums[start]+nums[left]+nums[right];
+                if(sum>0) --right;
+                else if(sum<0) ++left;
+                else{
+                    vector<int> a={nums[start],nums[left],nums[right]};
+                    out.push_back(a);
                 }
-                else if(nums[start]+nums[left]+nums[right]>0) --right;
-                else ++left;
             }
-            ++start;
         }
         return out;
     }
