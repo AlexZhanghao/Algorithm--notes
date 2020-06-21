@@ -35,8 +35,8 @@ void *my_memmove(void* dst,const void*src,size_t n){
     else{
         while(n){
             *s_dst=*s_src;
-            --s_src;
-            --s_dst;
+            ++s_src;
+            ++s_dst;
             --n;
         }
     }
