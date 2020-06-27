@@ -58,3 +58,39 @@ for i=1 to n-1
             m[p,q]=l
             w[p,q]=p
 ******最长回文子串******/
+#include<iostream>
+#include<vector>
+#include<algorithm>
+
+using namespace std;
+
+class Solution {
+public:
+    string longestPalindrome(string s) {
+        int n=s.size();
+        if(n<1) return s;
+        vector<vector<int>> dp(n,vector<int>(n,0));
+        for(int i=1;i<n;++i) dp[i][i]=1;
+
+        int max_len=1;
+        int start=0;
+        for(int i=1;i<n;++i){
+            for(int j=0;j<i;++j){
+                if(s[i]==s[j]){
+                    if(i==j+1) dp[j][i]=2;
+                    dp[j][i]=(dp[j+1][i-1]==-1)?-1:(dp[j+1][i-1]+2);
+
+                    if(max_len!=max(max_len,dp[j][i])){
+                        max_len=max(max_len,dp[j][i]);
+                        start=j;
+                    }
+                }
+                else dp[j][i]=-1;
+            }
+        }
+        
+        string out;
+        for(int i=start;i<start+max_len;++i) out+=s[i];
+        return out;
+    }
+};
