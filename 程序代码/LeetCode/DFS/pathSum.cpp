@@ -15,24 +15,28 @@ struct TreeNode {
 class Solution {
 public:
     vector<vector<int>> pathSum(TreeNode* root, int sum) {
-        vector<int> path;
-        dfs(root,sum,path,0);
-        return obj_path;       
+        if(root==NULL) return {};
+        vector<vector<int>> ret;
+        vector<int> nums;
+        dfs(root,ret,nums,sum,0);
+        return ret;
     }
 
-    void dfs(TreeNode* root,int obj,vector<int> path,int cur){
+    void dfs(TreeNode* root,vector<vector<int>>& ret,vector<int>& nums,int sum,int cur){
         if(root==NULL) return;
-        cur+=root->val;
-        path.push_back(root->val);
-        if(obj>0&&cur>obj||obj<0&&cur<obj) return;
-        if(root->left==NULL&&root->right==NULL&&cur==obj){ 
-            obj_path.push_back(path);
-            return;
-        }  
-        dfs(root->left,obj,path,cur);
-        dfs(root->right,obj,path,cur);
-    }
 
-private:
-    vector<vector<int>> obj_path;
+        cur+=root->val;
+        nums.push_back(root->val);
+        if(root->left){
+            dfs(root->left,ret,nums,sum,cur);
+        }
+        if(root->right){
+            dfs(root->right,ret,nums,sum,cur);
+        }
+        if(root->left==NULL&&root->right==NULL&&cur==sum){
+            ret.push_back(nums);
+        }
+        nums.pop_back();
+        return;
+    }
 };

@@ -43,3 +43,18 @@ private:
     list<pair<int,int>> l;
     unordered_map<int,list<pair<int,int>>::iterator> m;
 };
+
+int main(){
+    LRUCache* cache = new LRUCache(2);
+
+    cache->put(1, 1);
+    cache->put(2, 2);
+    cout<<cache->get(1);       // 返回  1
+    cache->put(3, 3);          // 该操作会使得关键字 2 作废
+    cout<<cache->get(2);       // 返回 -1 (未找到)
+    cache->put(4, 4);          // 该操作会使得关键字 1 作废
+    cout<<cache->get(1);       // 返回 -1 (未找到)
+    cout<<cache->get(3);       // 返回  3
+    cout<<cache->get(4);       // 返回  4
+
+}

@@ -10,7 +10,6 @@ void Swap(int &a, int &b) {
 }
 
 void DownFilter(int *arr, int i, int k) {
-	int n = sizeof(arr) / sizeof(*arr);
 	int cur = i, is_stop = false;
 	while (!is_stop) {
 		int tar = cur;
