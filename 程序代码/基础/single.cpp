@@ -57,7 +57,7 @@ public:
     static singleHungry* getinstance();
 };
 
-singleHungry* singleHungry::p=NULL;
+singleHungry* singleHungry::p=new singleHungry;
 
 singleHungry* singleHungry::getinstance(){
     return p;
