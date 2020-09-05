@@ -18,6 +18,6 @@ double QuickPow(double x,int n){
 }
 
 int main(){
-    cout<<QuickPow(2,100)<<endl;
+    cout<<QuickPow(2,10)<<endl;
     return 0;
 }
