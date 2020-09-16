@@ -3,12 +3,6 @@
 
 using namespace std;
 
-void Swap(int &a, int &b) {
-	int c = a;
-	a = b;
-	b = c;
-}
-
 void DownFilter(int *arr, int i, int k) {
 	int cur = i, is_stop = false;
 	while (!is_stop) {
@@ -20,7 +14,7 @@ void DownFilter(int *arr, int i, int k) {
 			tar = cur * 2 + 1;
 		}
 		if (tar != cur) {
-			Swap(arr[cur], arr[tar]);
+			swap(arr[cur], arr[tar]);
 			cur = tar;
 		}
 		else {
@@ -32,7 +26,7 @@ void DownFilter(int *arr, int i, int k) {
 void UpFilter(int *arr, int n) {
 	if (n == 0) return;
 	if (arr[n] < arr[n / 2]) {
-		Swap(arr[n], arr[n / 2]);
+		swap(arr[n], arr[n / 2]);
 		n = n / 2;
 	}
 }
@@ -48,7 +42,7 @@ void HeapSort(int *arr, int *sor, int k) {
 	int i = 0;
 	while (k >= 0) {
 		sor[i] = arr[0];
-		Swap(arr[0], arr[k - 1]);
+		swap(arr[0], arr[k - 1]);
 		++i; --k;
 		DownFilter(arr, 0, k);
 	}

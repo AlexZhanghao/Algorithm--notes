@@ -4,8 +4,11 @@
 using namespace std;
 
 int main(){
-    int m=-2;
-    int *n=&m;
-    m=0;
-    cout<<*n<<endl;
+    int b=10;
+    const int a=b;
+    cout<<a<<endl;
+    int *c=(int*)&a;
+    *c=20;
+    cout<<a<<endl;
+    return 0;
 }
